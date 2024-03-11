@@ -1,0 +1,6 @@
+[
+    { "name": "Babeth", "password": "BabethLovesHorses123", "email": "babethhakkenberg@gmail.com", "address": "Zuidereiland 17", "balance": 3},
+    { "name": "Hugo", "password": "0000", "email": "hugohakkenberg@gmail.com", "address": "Zuidereiland 17", "balance": 500},
+    { "name": "Angelique", "password": "greatAngie", "email": "groota@gmail.com", "address": "Zuidereiland 17", "balance": 15000},
+    { "name": "Merel", "password": "merelB2307", "email": "merelblom@gmail.com", "address": "Amsterdamseweg 181B", "balance": 1250}
+]
