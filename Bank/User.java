@@ -1,20 +1,20 @@
 package Bank;
 
 public class User {
-    int id;
-    String name;
-    String hashedPassword;
-    String email;
-    String address;
-    BankAccount bank;
+    private int id;
+    private String name;
+    private String hashedPassword;
+    private String email;
+    private String address;
+    private int balance;
 
-    public User(int id, String name, String hashedPassword, String email, String address, BankAccount bank) {
+    public User(int id, String name, String hashedPassword, String email, String address, int balance) {
         this.id = id;
         this.name = name;
         this.hashedPassword = hashedPassword;
         this.email = email;
         this.address = address;
-        this.bank = bank;
+        this.balance = balance;
     }
 
     public int getID() {
@@ -37,8 +37,12 @@ public class User {
         return address;
     }
 
-    public BankAccount getBalance() {
-        return bank;
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
 }
