@@ -1,2 +1,2 @@
 # ATM
-ATM project with Java
+ATM project to refresh my Java programming skills.
