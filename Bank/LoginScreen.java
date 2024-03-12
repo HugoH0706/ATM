@@ -61,7 +61,6 @@ public class LoginScreen extends JPanel {
 
                 if (validateUser(name, pin)) {
                     User user = db.getUser(name);
-                    System.out.println("User: " + user.getName());
                     cardLayout.show(cardPanel, "Transaction");
                     transactionScreen.setVariables(name, user.getBalance());
                 } else {

@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.xml.crypto.Data;
 
 public class WithdrawalScreen extends JPanel {
     private JLabel menu;
@@ -25,11 +24,16 @@ public class WithdrawalScreen extends JPanel {
     private Database db;
     private CardLayout cardLayout;
     private JPanel cardPanel;
+    private OtherScreen otherScreen;
 
     public WithdrawalScreen(CardLayout cardLayout, JPanel cardPanel, Database db) {
         this.cardLayout = cardLayout;
         this.cardPanel = cardPanel;
         this.db = db;
+
+        otherScreen = new OtherScreen(cardLayout, cardPanel, db);
+        cardPanel.add(otherScreen, "Other");
+
         setLayout(new BorderLayout());
 
         menu = new JLabel("Press the amount you want to withdraw!", SwingConstants.CENTER);
@@ -47,6 +51,7 @@ public class WithdrawalScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 withdrawl(20);
+                cardLayout.show(cardPanel, "Transaction");
             }
         });
 
@@ -54,6 +59,7 @@ public class WithdrawalScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 withdrawl(50);
+                cardLayout.show(cardPanel, "Transaction");
             }
         });
 
@@ -61,13 +67,15 @@ public class WithdrawalScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 withdrawl(100);
+                cardLayout.show(cardPanel, "Transaction");
             }
         });
 
         otherButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // cardLayout.show(cardPanel, "Other");
+                cardLayout.show(cardPanel, "Other");
+                otherScreen.setName(name);
             }
         });
 

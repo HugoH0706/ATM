@@ -1,33 +1,103 @@
 package Bank;
 
-public class DepositScreen {
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-}
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public void deposit(User user, Scanner sc) {
-    boolean success = false;
-    int amount = 0;
+public class DepositScreen extends JPanel {
+    private JLabel menu;
+    private String name;
+    private JTextField amount;
+    private JButton backButton;
+    private JButton exitButton;
+    private JButton confirmButton;
+    private Database db;
+    private CardLayout cardLayout;
+    private JPanel cardPanel;
 
-    do {
-        try {
-            System.out.println();
-            System.out.println("Current balance: $" + user.getBalance());
-            System.out.println("Enter amount you want to deposit: ");
+    public DepositScreen(CardLayout cardLayout, JPanel cardPanel, Database db) {
+        this.cardLayout = cardLayout;
+        this.cardPanel = cardPanel;
+        this.db = db;
 
-            String input = sc.next();
-            amount = Integer.parseInt(input);
-            success = true;
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input, try again!");
-        }
-    } while (!success);
+        setLayout(new BorderLayout());
 
-    if (amount >= 0) {
-        int newBalance = amount + user.getBalance();
-        user.setBalance(newBalance);
-        System.out.println("Transaction completed, current balance: $" + user.getBalance());
-    } else {
-        System.out.println("Invalid deposited amount");
+        menu = new JLabel("Enter the amount you want to deposit:");
+        add(menu, BorderLayout.NORTH);
+
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
+        amount = new JTextField();
+        add(amount, BorderLayout.CENTER);
+
+        confirmButton = new JButton("Confirm");
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String input = amount.getText();
+                if (validAmount(input)) {
+                    int deposit = Integer.parseInt(input);
+                    User user = db.getUser(name);
+                    if (deposit >= 0) {
+                        user.setBalance((user.getBalance() + deposit));
+                        handleTransaction("Transaction completed");
+                        cardLayout.show(cardPanel, "Transaction");
+                    } else {
+                        handleTransaction("Invalid amount entered, try again!");
+                    }
+                } else {
+                    handleTransaction("Invalid input, try again!");
+                }
+            }
+        });
+
+        backButton = new JButton("Back");
+        exitButton = new JButton("Exit");
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "Transaction");
+            }
+        });
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        buttonPanel.add(amount);
+        buttonPanel.add(confirmButton);
+        buttonPanel.add(backButton);
+        buttonPanel.add(exitButton);
+        add(buttonPanel, BorderLayout.CENTER);
     }
-    menu(user, sc);
+
+    private boolean validAmount(String amount) {
+        try {
+            Integer.parseInt(amount);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private void handleTransaction(String message) {
+        JOptionPane.showMessageDialog(this, message, "Transaction Details",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
 }

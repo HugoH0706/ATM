@@ -2,7 +2,6 @@ package Bank;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Scanner;
 
 public class GUI extends JFrame {
     private CardLayout cardLayout;

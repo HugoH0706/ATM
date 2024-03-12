@@ -21,6 +21,7 @@ public class TransactionScreen extends JPanel {
     private JButton exitButton;
     private WithdrawalScreen withdrawalScreen;
     private BalanceScreen balanceScreen;
+    private DepositScreen depositScreen;
     private Database db;
 
     private CardLayout cardLayout;
@@ -35,6 +36,8 @@ public class TransactionScreen extends JPanel {
         cardPanel.add(withdrawalScreen, "Withdrawal");
         balanceScreen = new BalanceScreen(cardLayout, cardPanel, db);
         cardPanel.add(balanceScreen, "Balance");
+        depositScreen = new DepositScreen(cardLayout, cardPanel, db);
+        cardPanel.add(depositScreen, "Deposit");
 
         setLayout(new BorderLayout());
 
@@ -59,7 +62,8 @@ public class TransactionScreen extends JPanel {
         depositButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // cardLayout.show(cardPanel, "Deposit");
+                cardLayout.show(cardPanel, "Deposit");
+                depositScreen.setName(name);
             }
         });
 

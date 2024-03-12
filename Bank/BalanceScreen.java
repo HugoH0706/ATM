@@ -31,7 +31,6 @@ public class BalanceScreen extends JPanel {
         add(menu, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
-
         backButton = new JButton("Back");
         exitButton = new JButton("Exit");
 
@@ -51,7 +50,6 @@ public class BalanceScreen extends JPanel {
 
         buttonPanel.add(backButton);
         buttonPanel.add(exitButton);
-
         add(buttonPanel, BorderLayout.CENTER);
     }
 
